@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class create extends Component {
     
@@ -28,7 +29,17 @@ export default class create extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(`name is ${this.state.name} and port is ${this.state.port}`);
+        //console.log(`name is ${this.state.name} and port is ${this.state.port}`);
+        const serverport = {
+            name: this.state.name,
+            port: this.state.port
+        }
+
+        //post request
+        axios.post('http://localhost:4000/serverport/add', serverport)
+        .then(res => console.log(res.data));
+
+
         this.setState({
             name: '',
             port: ''
